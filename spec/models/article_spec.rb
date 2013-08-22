@@ -630,5 +630,28 @@ describe Article do
     end
 
   end
-end
 
+  describe "#merge_with" do
+    before do
+      @article_one = Factory.create(:article)
+      @article_one.update_attributes(title: 'Article 1', body: 'Content from article 1')
+      @article_two = Factory.create(:article)
+      @article_two.update_attributes(title: 'Article 2', body: 'Content from article 2')
+
+      2.times { Factory(:comment, :article => @article_one) }
+      2.times { Factory(:comment, :article => @article_two) }
+    end
+
+    subject { @article_one.merge_with(@article_two) }
+
+    it "should contain both articles text" do
+      subject.body.should include(@article_one.body, @article_two.body)
+    end
+
+    it "should contain both articles comments" do
+      subject.body.should include(@article_one.comments, @article_two.comments)
+    end
+
+  end
+
+end

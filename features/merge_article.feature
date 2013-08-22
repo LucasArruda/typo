@@ -11,7 +11,7 @@ Feature: Merge Articles
     Given I am on the new article page
     Then I should not see "Merge Articles"
 
-  Scenario: Successfully merges two articles
+  Scenario: When articles are merged, the merged article should contain the text of both previous articles
     Given I am on the new article page
     When I fill in "article_title" with "Article 1"
     And I fill in "article__body_and_extended_editor" with "Content from article 1"
