@@ -652,6 +652,14 @@ describe Article do
       subject.body.should include(@article_one.comments, @article_two.comments)
     end
 
+    it "should contain title from only one of two articles" do
+      subject.title.should satisfy { |s| [@article_one.title, @article_two.title].include?(s) }
+    end
+
+    it "should containt author from only one of two articles" do
+      subject.article.should satisfy { |s| [@article_one.author, @article_two.author].include?(s) }
+    end
+
   end
 
 end
