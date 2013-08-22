@@ -624,6 +624,23 @@ describe Admin::ContentController do
 
     describe 'edit action' do
 
+      describe 'merge action' do
+        before :each do
+          @second_article = Factory(:second_article, :user => @user)
+        end
+
+        it "should prevent non-admins from merging" do
+          get :merge, 'id' => @article.id, 'merge_with' => @second_article.id
+          response.should redirect_to(:action => 'index')
+        end
+
+        it "should keep the number of existing articles" do
+          lambda {
+            get :merge, 'id' => @article.id, 'merge_with' => @second_article.id
+          }.should_not change(Article, :count)
+        end
+      end
+
       it "should redirect if edit article doesn't his" do
         get :edit, :id => Factory(:article, :user => Factory(:user, :login => 'another_user')).id
         response.should redirect_to(:action => 'index')
