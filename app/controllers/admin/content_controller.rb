@@ -113,6 +113,17 @@ class Admin::ContentController < Admin::BaseController
     render :text => nil
   end
 
+  def merge
+    article = Article.find(params[:id])
+    if current_user.admin? && merged_article = article.merge_with(params[:merge_with])
+      flash[:notice] = 'Articles successfully merged.'
+      redirect_to merged_article.permalink_url
+    else
+      flash[:error] = 'Articles could not be merged.'
+      redirect_to :action => 'index'
+    end
+  end  
+
   protected
 
   def get_fresh_or_existing_draft_for_article

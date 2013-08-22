@@ -5,7 +5,7 @@ Feature: Merge Articles
 
   Background:
     Given the blog is set up 
-    And I am logged into the admin panel as an admin
+    And I am logged into the admin panel as admin
 
   Scenario: Merge Articles not available for new articles
     Given I am on the new article page

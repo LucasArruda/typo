@@ -416,7 +416,26 @@ class Article < Content
     user.admin? || user_id == user.id
   end
 
+  def merge_with(other_article)
+    unless article_is_same_or_dont_exist(self, other_article)
+      new_article = user.articles.create({
+        body: body + other_article.body,
+        comments: comments + other_article.comments,
+        title: title,
+        published: true
+      })
+      self.reload.destroy && other_article.reload.destroy
+      new_article
+    else
+      nil
+    end
+  end
+
   protected
+
+  def article_is_same_or_dont_exist(article_one, article_two)
+    article_one.equal?(article_two) || !Article.exists?(article_one.id) || !Article.exists?(article_two.id)
+  end
 
   def set_published_at
     if self.published and self[:published_at].nil?
