@@ -21,8 +21,8 @@ Feature: Merge Articles
     And I fill in "article__body_and_extended_editor" with "Content from article 2"
     And I press "Publish"
     And I follow "Edit"
-    When I fill in "merge_with" with "2"
+    When I fill in "merge_with" with "4"
     And I press "Merge"
-    Then I should be on the edit article page
+    Then I should be on the latest article page 
     And I should see "Content from article 1"
     And I should see "Content from article 2"
