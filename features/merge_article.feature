@@ -16,11 +16,11 @@ Feature: Merge Articles
     When I fill in "article_title" with "Article 1"
     And I fill in "article__body_and_extended_editor" with "Content from article 1"
     And I press "Publish"
+    And I go to the new article page
     When I fill in "article_title" with "Article 2"
     And I fill in "article__body_and_extended_editor" with "Content from article 2"
     And I press "Publish"
     And I follow "Edit"
-    Given I am on the edit article page
     When I fill in "merge_with" with "5"
     And I press "Merge"
     Then I should be on the edit article page

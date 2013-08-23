@@ -649,7 +649,7 @@ describe Article do
     end
 
     it "should contain both articles comments" do
-      subject.body.should include(@article_one.comments, @article_two.comments)
+      subject.body.should include(*@article_one.comments, *@article_two.comments)
     end
 
     it "should contain title from only one of two articles" do
@@ -657,7 +657,7 @@ describe Article do
     end
 
     it "should containt author from only one of two articles" do
-      subject.article.should satisfy { |s| [@article_one.author, @article_two.author].include?(s) }
+      subject.user.should satisfy { |s| [@article_one.user, @article_two.user].include?(s) }
     end
 
   end
