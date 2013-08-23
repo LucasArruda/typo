@@ -417,6 +417,8 @@ class Article < Content
   end
 
   def merge_with(other_article)
+    other_article = find_article_for_merging_or_create(other_article)
+
     unless article_is_same_or_dont_exist(self, other_article)
       new_article = user.articles.create({
         body: body + other_article.body,
@@ -432,6 +434,14 @@ class Article < Content
   end
 
   protected
+
+  def find_article_for_merging_or_create(other_article)
+    if other_article.class == Article
+      other_article
+    else
+      Article.find_by_id(other_article.to_i) || Article.new
+    end
+  end
 
   def article_is_same_or_dont_exist(article_one, article_two)
     article_one.equal?(article_two) || !Article.exists?(article_one.id) || !Article.exists?(article_two.id)
