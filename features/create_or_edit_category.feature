@@ -8,7 +8,7 @@ Feature: Create or edit Category
     And I am logged into the admin panel as author
 
   Scenario: Adding category
-  	When I go to new category page
+  	When I go to the admin categories page
   	And I fill in "Name" with "technology"
   	And I fill in "Keywords" with "tech technology computer"
   	And I fill in "Permalink" with "tech"
@@ -21,7 +21,7 @@ Feature: Create or edit Category
   	And I should see "Category about technology and computers"
 
   Scenario: Editing category
-  	When I go to new category page
+  	When I go to the admin categories page
   	And I fill in "Name" with "technology"
   	And I fill in "Keywords" with "tech technology computer"
   	And I fill in "Permalink" with "tech"
